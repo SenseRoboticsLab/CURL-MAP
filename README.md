@@ -1,5 +1,5 @@
 # CURL-MAP
-[Paper]()
+[Paper](https://github.com/SenseRoboticsLab/CURL-MAP/blob/master/paper/LiDAR_ICRA2024.pdf)
 
 The code will be released soon.
 
