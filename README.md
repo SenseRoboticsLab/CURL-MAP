@@ -10,7 +10,7 @@ We extend the continuous reconstruction and memory efficiency advantages of [CUR
 </p> 
 With the same CURL-MAP, can produce different resolutions of reconstruction.
 
-## Examples
+## Examples (Note: Large GIFs, Loading Time Required)
 ### 1. Continuous Reconstruction
 <p align="center">
 <img src="images/1.gif" alt="continuous reconstruction" width=80%/>
