@@ -69,6 +69,7 @@ roslaunch patchworkpp run_patchwork_kitti.launch data_dir:=/home/user/catkin_ws/
 ```
 
 3. Publish rosbag data
+
 Modify the LiDAR topic name inside `/home/user/catkin_ws/src/patchwork-plusplus-ros-modified/launch/demo_newer_college.launch`
 ```
 roslaunch patchworkpp demo_newer_college.launch
