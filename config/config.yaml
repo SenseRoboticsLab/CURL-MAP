@@ -252,8 +252,8 @@ AABB:
 
 SH_TABLE:
   is_speed_up: true
-  max_SH_degree: 5
-  warping_SH_degree: 5 # used to smooth the reconstruction when using direct method
+  max_SH_degree: 10
+  warping_SH_degree: 10 # used to smooth the reconstruction when using direct method
   ground_SH_degree: 2
   SH_scale: 0.8
   azi_rso: 300
@@ -280,7 +280,7 @@ CURL_TRACKING:
     max_ground_pairs: -1 # -1 means no restrictions 10
   NEW_LANDMARK_GENERATION:
     minimum_points_to_add_new_patch: 50
-    highest_IoU_new_landmark_thres: 0.05
+    highest_IoU_new_landmark_thres: 0.1
     lowest_IoU_for_same_obj_different_patch: 0.8
     lowest_landmark_centroids_distance: 0.5
     landmark_queue_size: -1 # -1 means disable

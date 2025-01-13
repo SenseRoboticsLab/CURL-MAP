@@ -1,4 +1,4 @@
-# CURL-MAP
+# CURL-MAP ([Paper](https://ieeexplore.ieee.org/document/10610760))
 We extend the continuous reconstruction and memory efficiency advantages of [CURL](https://github.com/SenseRoboticsLab/CURL) to large-scale maps, introducing new capabilities for odometry and updatable mapping.
 <p align="center">
 <img src="./images/ICRA24_cover_fig_page-0001.jpg" alt="framework" width=80%/>
