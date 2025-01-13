@@ -85,6 +85,10 @@ rosbag play <your rosbag>
 roslaunch curl_slam curl_reconstruction.launch
 ```
 
+# ToDo
+- [ ] Clean the config file, remove useless parameters
+- [ ]  Add comments for parameters
+- [ ]  Clean the code
 
 # Results (Note: Large GIFs, Loading Time Required)
 ### 1. Continuous Reconstruction
@@ -117,8 +121,3 @@ CURL-MAP is able to achieve real-time performance on a CPU in the FAST mode.
 <p align="center">
 <img src="./images/time_evaluation-cropped_page-0001.jpg" alt="framework" width=80%/>
 </p> 
-
-# ToDo
-- [ ] Clean the config file, remove useless parameters
-- [ ]  Add comments for parameters
-- [ ]  Clean the code
