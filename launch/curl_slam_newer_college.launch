@@ -1,0 +1,4 @@
+<launch>
+    <node name="odometry_node_newer_college" pkg="curl_slam" type="odometry_node" args="/home/user/project/ros/slam/src/CURL_SLAM_ros/config/config_Newer_College.yaml"  output="screen"/>
+<!--     <node name="rivz_shape" pkg="rviz" type="rviz" args="-d $(find curl_slam)/rviz/rviz_points.rviz"/> -->
+</launch>

@@ -1,0 +1,125 @@
+DIRECT_METHOD:
+  method: "x_y" # x_y theta_x_y affine
+  valid_region_method: "cut" # cut interp
+  minimum_img_rso: 25 # recons_img's minimum rso. 20 for normal tracking, 80 for pyramid tracking
+  gamma_sampling_interval: 0.05
+  is_pyramid_track: true
+  pyramid_minimum_img_rso: 10
+  is_display: false
+  is_display_block: false
+  max_iters: 50
+  update_points_method: "conformal_back_projection" # center_movement conformal_back_projection (this one is a little bit better, but with more computations)
+  is_update_sph_coeff: false
+  update_sph_coeff_threshold: 0.03
+  # smooth the imge
+  is_gaussian_blur: false
+  sigma: 3
+  # is_loss_function
+  loss_function: "huber_loss" # none linear trapeziform huber_loss
+  IQR_delta: 1.0
+  linear_loss_param: 5
+  trapeziform_lower_bound: 0.01
+  trapeziform_higher_bound: 0.1
+
+
+CONFORMAL_MAPPING:
+  # is real time
+  is_rt: true
+  # multi-thread num
+  thread_num: 5
+  MAPPING:
+    map_window_size: -1 # -1 means no dropping of the map
+  SEGMENTATION:
+    is_even_segmentation: true
+    # cut larger patch into small pieces
+    cut_threshold: 3
+    ground_cut_threshold: 5
+  FILTER:
+    # patch filter
+    patch_minimum_pts_num: 50
+    patch_minimun_pts_num_after_filter: 50
+    minimum_triangles_after_filter: 20
+    # voxel grid filter
+    is_voxel_grid_filter: true
+    leaf_size: 0.15
+    # statistical filter
+    is_StatisticalOutlierRemoval: false
+    outlier_removing_neighbour_num: 10
+    outlier_removing_std: 2
+    # radius filter
+    is_RadiusOutlierRemoval: false
+    outlier_removing_radius: 0.02
+    outlier_removing_min_nei: 3
+  TRIANGULATION:
+    # defect triangle
+    defect_triangulation_type: "3D" # 2D 3D
+    tri_angle_min: 10 # degree 3d 15 the larger the more strict
+    tri_angle_max: 150 # degree the less the more strict
+    # IQR method
+    is_IQR: true
+    tri_area_max_scale_factor: 2 # 2d 10 3d 20
+    tri_length_max_scale_factor: 2 # 2d 10 3d 20
+    # histogram & fall method
+    is_hist: false
+    is_hist_fall: false
+    tri_area_percentage: 0.9995 # hist 0.995 # hist fall: 0.9995
+    tri_length_percentage: 0.9995 # hist 0.995 # hist fall: 0.99995
+  CONFORMALMAPPING:
+    # corner selection rectangular weight
+    rectangular_corner_weight: 100
+    # rectangular conformal mapping
+    height_opt_iters: 24
+
+
+DEBUG:
+  KITTI_seq: "Newer_College_Short_01" #Newer_College_Short_01
+  is_save_results: false # middle information
+  is_save_final_results: false
+
+AABB:
+  skin_thickness: 0.0 # percentage of length
+  extra_skin_thickness: 0.2 # the lower more pricise data association
+  touch_is_overlap: false
+
+SH_TABLE:
+  is_speed_up: true
+  max_SH_degree: 20
+  warping_SH_degree: 10 # used to smooth the reconstruction when using direct method
+  SH_scale: 0.8
+  azi_rso: 300
+  elev_rso: 300
+  init_SPH_pass: 1
+  inv_method: "normal"
+  approx_thres: 0.5
+  update_sph_counter_thres: 20
+  update_sph_cpeff_queue_size: 2
+  sampling_factor: 1
+
+CURL_TRACKING:
+  frequency: 11
+  DATA_ASSOCIATION:
+    weight_of_IoU: 1 # (0~1) centroids distance's weight is 1-weight_of_IoU
+    largest_centroid_distance: 0.2 # for final score calculation
+    largest_tree_key_difference: -1 # don't use the map long ago; -1 means use the whole map
+    IQR_scale_factor: 0.5
+    is_select_the_best_pair_only: true
+    is_use_score_as_weight: true
+    max_query_paired_patches: -1 # -1 means no restriction
+  NEW_LANDMARK_GENERATION:
+    highest_IoU_new_landmark_thres: 0.1
+    lowest_IoU_for_same_obj_different_patch: 0.8
+    lowest_landmark_centroids_distance: 0.5
+    landmark_queue_size: 2
+    max_new_added_landmarks: -1 # -1 means no restriction
+    max_distance_of_landmarks: -100 # -100 means no restriction
+  OPTIMIZATION:
+    is_two_step_opt: true # two step optimization means first optimize z, roll, pitch by using ground points, then optimize x, y, yaw by using segment points
+    max_num_iterations: 100
+    update_state_every_iteration: false
+    is_robust_kernel: true
+    kernel_threshold: 0.01
+    max_valid_residual: 0.1
+    opt_num_threads: 2
+    ground_opt_step: 3
+  VISUALIZATION:
+    color_change_step: 0.33

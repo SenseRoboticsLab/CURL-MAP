@@ -1,0 +1,5 @@
+<launch>
+    <node name="map_generation_node" pkg="curl_slam" type="map_generation_node" args="/home/user/catkin_ws/src/CURL_SLAM_ros/config/config.yaml"  output="screen"/>
+    <node name="rivz_shape" pkg="rviz" type="rviz" args="-d $(find curl_slam)/rviz/rviz_reconstruction.rviz"/>
+    <node name="dynamic_configure" pkg="rqt_reconfigure" type="rqt_reconfigure"/>
+</launch>

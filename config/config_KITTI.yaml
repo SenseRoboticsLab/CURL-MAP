@@ -1,0 +1,99 @@
+DATA_SET: KITTI
+
+KITTI:
+  root_dir: "/media/zkc/T7/dataSets/Kitti_pcd"
+  sequence: "/7" # 0~10
+  scans_dir: "/sequences"
+  scan_scale_factor: 1
+  poses_dir: "/poses"
+  semantics_dir:
+  start_frame: 200
+  end_frame: 220
+  scan_file_type: "pcd"
+  semantic_file_type: "txt"
+  poses_file_type: "txt"
+  is_debug: true
+
+KITTI_PREPROCESSING:
+  length_percentage: 0.95
+  min_length: 4
+  filter_mean: 10
+  filter_std: 10
+
+SIMULATOR:
+  root_dir: "/media/zkc/Extreme/omniverse_issac/lidar_simulator"
+  sequence: "/rotation" # rotation_translation
+  scans_dir: "/scans_txt"
+  scan_scale_factor: 0.01 #should be 1 for other dataset
+  poses_dir: "/poses"
+  semantics_dir: "/semantics_txt"
+  start_frame: 51
+  end_frame: 60
+  scan_file_type: "txt"
+  semantic_file_type: "txt"
+  poses_file_type: "txt"
+  is_debug: true
+
+VSA:
+  is_selected: false
+  seeding_method: "HIERARCHICAL" # RANDOM INCREMENTAL HIERARCHICAL
+  max_number_of_proxies: 50 #200
+  number_of_iterations: 10 #30
+  min_error_drop: 0.0 #0
+
+PCL_NORMAL:
+  search_region: 300
+
+REGION_GROWING:
+  is_selected: false
+  is_igl: false
+  min_cluster_size: 0
+  max_cluster_size: 1000000
+  number_of_neighbours: 20 #igl: 50  non-igl:  50
+  smoothness_threshold: 10 #100   #igl: 1   non-igl:  0.1
+  curvature_threshold: 0.1 #0.05   #igl: 23  non-igl:  0.05
+
+CURVATURE:
+  gaussian_curvature_is_selected: true
+  mean_curvature_is_selected: true
+  area_method: MIXED_VORONOI # MIXED_VORONOI BARYCENTRIC
+
+PROBABILITY_CLUSTERING:
+  is_merge: true
+  # is the normal and curvature need average?
+  is_average_face_normal_and_curvature: "none" # none normal curvature
+  average_window_size: 10
+  # initial window size
+  initial_window_size: 30
+  # non-adaptive threshold
+  th_normal_angle: 99999 # face normal angle threshold in degree KITTI 40
+  th_diff_normal_norm_mean: 0.5
+  th_diff_normal_variance: 100
+  th_K_L_J_S_threshold: 0
+  th_diff_G_curvature_mean: 10000000
+  th_diff_G_curvature_variance: 100000000
+  th_diff_M_curvature_mean: 0.3
+  th_diff_M_curvature_variance: 0.3
+
+  # adaptive threshold in percentage of change to add a new seed
+  # normal
+  is_normal_selected: true
+  diff_normal_norm_mean: 0.2 #1 is 60 degree this parameter will affect the initial seed decision
+  diff_normal_variance: 1
+  # edge length: it would be good to have statistics model for each triangle edge rather than circumstance
+  is_length_selected: false
+  diff_length_mean: 100
+  diff_length_variance: 100000
+  # gaussian curvature
+  # comparison metric
+  comparison_metric: "mean" # mean K_L J_S
+  is_G_curvature_selected: false
+  K_L_J_S_threshold: 0.5 # 0.1
+  diff_G_curvature_mean: 0.1 #1000000000 K-L similarity
+  diff_G_curvature_variance: 0.1 #100000000000
+  # mean curvature
+  is_M_curvature_selected: false
+  diff_M_curvature_mean: 1000
+  diff_M_curvature_variance: 10000
+  # plot a region
+  region_num: 0

@@ -1,0 +1,7 @@
+<launch>
+    <node name="rivz_patch_to_patch_reference" pkg="rviz" type="rviz" args="-d $(find curl_slam)/rviz/rviz_patch_to_patch_reference.rviz"/>
+    <node name="rivz_patch_to_patch_updated" pkg="rviz" type="rviz" args="-d $(find curl_slam)/rviz/rviz_patch_to_patch_updated.rviz"/>
+    <node name="rivz_init" pkg="rviz" type="rviz" args="-d $(find curl_slam)/rviz/rviz_init_all.rviz"/>
+    <node name="rivz_final" pkg="rviz" type="rviz" args="-d $(find curl_slam)/rviz/rviz_optimized_all.rviz"/>
+    <node name="rivz_real_time" pkg="rviz" type="rviz" args="-d $(find curl_slam)/rviz/rviz_real_time_all.rviz"/>
+</launch>

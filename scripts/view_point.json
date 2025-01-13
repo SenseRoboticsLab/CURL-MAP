@@ -1,0 +1,41 @@
+// view point for
+{
+	"class_name" : "ViewTrajectory",
+	"interval" : 29,
+	"is_loop" : false,
+	"trajectory" : 
+	[
+		{
+			"boundingbox_max" : [ 351.16149992927609, 88.429997395603451, 6.2237179309209623 ],
+			"boundingbox_min" : [ -214.84355721637826, -60.315142513272647, -6.4934416500789691 ],
+			"field_of_view" : 60.0,
+			"front" : [ 0.0, 0.0, 1.0 ],
+			"lookat" : [ 68.158971356448916, 14.057427441165402, -0.13486185957900343 ],
+			"up" : [ 0.0, 1.0, 0.0 ],
+			"zoom" : 0.23999999999999996
+		}
+	],
+	"version_major" : 1,
+	"version_minor" : 0
+}
+
+// whole 06
+{
+	"class_name" : "ViewTrajectory",
+	"interval" : 29,
+	"is_loop" : false,
+	"trajectory" : 
+	[
+		{
+			"boundingbox_max" : [ 351.04708900000003, 88.399131800000006, 6.2209358200000002 ],
+			"boundingbox_min" : [ -213.164841, -60.257114399999999, -5.8865461300000002 ],
+			"field_of_view" : 60.0,
+			"front" : [ 0.0, 0.0, 1.0 ],
+			"lookat" : [ 68.941124000000016, 14.071008700000004, 0.16719484500000004 ],
+			"up" : [ 0.0, 1.0, 0.0 ],
+			"zoom" : 0.25999999999999956
+		}
+	],
+	"version_major" : 1,
+	"version_minor" : 0
+}

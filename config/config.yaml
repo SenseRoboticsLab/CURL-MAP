@@ -1,0 +1,309 @@
+DATA_SET: SIMULATOR_OPTIMIZATION
+
+KITTI:
+  root_dir: "/home/user/dataSets/Kitti_pcd"
+  sequence: "/7" # 0~10
+  scans_dir: "/sequences"
+  scan_scale_factor: 1
+  poses_dir: "/poses"
+  semantics_dir:
+  start_frame: 200
+  end_frame: 220
+  scan_file_type: "pcd"
+  semantic_file_type: "txt"
+  poses_file_type: "txt"
+  is_debug: true
+
+KITTI_PREPROCESSING:
+  length_percentage: 0.95
+  min_length: 4
+  filter_mean: 10
+  filter_std: 10
+
+SIMULATOR:
+  root_dir: "/media/zkc/Extreme/omniverse_issac/lidar_simulator"
+  sequence: "/rotation" # rotation_translation
+  scans_dir: "/scans_txt"
+  scan_scale_factor: 0.01 #should be 1 for other dataset
+  poses_dir: "/poses"
+  semantics_dir: "/semantics_txt"
+  start_frame: 51
+  end_frame: 60
+  scan_file_type: "txt"
+  semantic_file_type: "txt"
+  poses_file_type: "txt"
+  is_debug: true
+
+SIMULATOR_OPTIMIZATION:
+  root_dir: "/media/zkc/Extreme/omniverse_issac/lidar_simulator"
+  sequence: "/patch_00"
+  semantics_dir: "/semantics_txt"
+
+  scans_dir: "/scans_txt" # scans_txt scans_txt_noised
+  transformation_obj_LiDAR_dir: "/transformation_obj_LiDAR" # transformation_obj_LiDAR transformation_obj_LiDAR_noised
+  conformal_map_dir: "/conformal_map" # conformal_map conformal_map_noised
+  gamma_gradient_dir: "/gamma_gradient" # gamma_gradient gamma_gradient_noised
+  sph_coeff_dir: "/sph_coeff_20" # sph_coeff_20 sph_coeff_noised_20
+  valid_idx_dir: "/valid_idx" # valid_idx valid_idx_noised
+
+  odometry_file: "/odometry.txt"
+  odometry_noised_file: "/odometry_noised.txt"
+  trajectory_file: "/trajectory.txt"
+  trajectory_noised_file: "/trajectory_noised.txt"
+  scan_scale_factor: 1
+  obj_num: 5
+  start_frame: 1000
+  end_frame: 1020 #1020 
+  scan_file_type: "txt"
+  semantic_file_type: "txt"
+  gamma_rso: 0.05
+
+VSA:
+  is_selected: false
+  seeding_method: "HIERARCHICAL" # RANDOM INCREMENTAL HIERARCHICAL
+  max_number_of_proxies: 50 #200
+  number_of_iterations: 10 #30
+  min_error_drop: 0.0 #0
+
+PCL_NORMAL:
+  search_region: 300
+
+REGION_GROWING:
+  is_selected: false
+  is_igl: false
+  min_cluster_size: 0
+  max_cluster_size: 1000000
+  number_of_neighbours: 20 #igl: 50  non-igl:  50
+  smoothness_threshold: 10 #100   #igl: 1   non-igl:  0.1
+  curvature_threshold: 0.1 #0.05   #igl: 23  non-igl:  0.05
+
+CURVATURE:
+  gaussian_curvature_is_selected: true
+  mean_curvature_is_selected: true
+  area_method: BARYCENTRIC # MIXED_VORONOI BARYCENTRIC
+
+PROBABILITY_CLUSTERING:
+  is_merge: true
+  # is the normal and curvature need average?
+  is_average_face_normal_and_curvature: "none" # none normal curvature
+  average_window_size: 10
+  # initial window size
+  initial_window_size: 30
+  # non-adaptive threshold
+  th_normal_angle: 99999 # face normal angle threshold in degree KITTI 40
+  th_diff_normal_norm_mean: 0.5
+  th_diff_normal_variance: 100
+  th_K_L_J_S_threshold: 0
+  th_diff_G_curvature_mean: 10000000
+  th_diff_G_curvature_variance: 100000000
+  th_diff_M_curvature_mean: 0.3
+  th_diff_M_curvature_variance: 0.3
+
+  # adaptive threshold in percentage of change to add a new seed
+  # normal
+  is_normal_selected: true
+  diff_normal_norm_mean: 0.2 #1 is 60 degree this parameter will affect the initial seed decision
+  diff_normal_variance: 1
+  # edge length: it would be good to have statistics model for each triangle edge rather than circumstance
+  is_length_selected: false
+  diff_length_mean: 100
+  diff_length_variance: 100000
+  # gaussian curvature
+  # comparison metric
+  comparison_metric: "J_S" # mean K_L J_S
+  is_G_curvature_selected: true
+  K_L_J_S_threshold: 0.2 # 0.1
+  diff_G_curvature_mean: 1 #1000000000 K-L similarity
+  diff_G_curvature_variance: 1 #100000000000
+  # mean curvature
+  is_M_curvature_selected: false
+  diff_M_curvature_mean: 1000
+  diff_M_curvature_variance: 10000
+  # plot a region
+  region_num: 0
+
+LOCAL_BA:
+  # parameters that control which residual will be added
+  is_set_constant: true
+  is_couple: true
+  is_couple_sph: false
+  is_couple_sph_mod: false
+  is_couple_switch: false
+  is_odometry: false
+  is_sph_fix_point_to_map: false
+  is_nn_data_association: false
+  is_pure_ICP: false
+  is_direct_method: true
+  is_obj_fix: true
+  weight: 0.01
+  # optimization options
+  max_num_iterations: 100
+  update_state_every_iteration: true
+  # large optimization
+  iter_num: 2 #50
+  threshold: 1e-4
+  # debug
+  is_debug: false
+  is_ground_truth_initial: false
+  debug_2D_projection_dir: "/media/zkc/Extreme/omniverse_issac/lidar_simulator/patch_00/experiment/2D_projection"
+
+##############################################################
+##############################################################
+##############################################################
+
+DIRECT_METHOD:
+  CURL_ODOMETRY:
+    minimum_img_rso: 15 # recons_img's minimum rso. 20 for normal tracking, 80 for pyramid tracking
+    gamma_sampling_interval: 0.05
+  method: "x_y" # x_y theta_x_y affine
+  valid_region_method: "cut" # cut interp
+  is_pyramid_track: true
+  pyramid_minimum_img_rso: 10
+  is_display: false
+  is_display_block: false
+  max_iters: 50
+  update_points_method: "conformal_back_projection" # center_movement conformal_back_projection (this one is a little bit better, but with more computations)
+  is_update_sph_coeff: false
+  update_sph_coeff_threshold: 0.03
+  # smooth the imge
+  is_gaussian_blur: false
+  sigma: 3
+  # is_loss_function
+  loss_function: "huber_loss" # none linear trapeziform huber_loss
+  IQR_delta: 1.0
+  linear_loss_param: 5
+  trapeziform_lower_bound: 0.01
+  trapeziform_higher_bound: 0.1
+
+CONFORMAL_MAPPING:
+  # is real time
+  is_rt: true
+  # multi-thread num
+  thread_num: 3
+  ICP:
+    is_icp: false
+    is_points_distance: false
+  MAPPING:
+    map_window_size: -1 # -1 means no dropping of the map
+  SEGMENTATION:
+    # if true, integrad all non-ground points and segment it in voxel
+    is_even_segmentation: true
+    # cut larger patch into small pieces
+    cut_threshold: 3 # 3
+    ground_cut_threshold: 5
+  FILTER:
+    # patch filter
+    patch_minimum_pts_num: 50
+    patch_minimun_pts_num_after_filter: 50
+    minimum_triangles_after_filter: 50
+    # voxel grid filter
+    is_voxel_grid_filter: true
+    leaf_size: 0.2
+    # statistical filter
+    is_StatisticalOutlierRemoval: false
+    outlier_removing_neighbour_num: 10
+    outlier_removing_std: 2
+    # radius filter
+    is_RadiusOutlierRemoval: false
+    outlier_removing_radius: 0.02
+    outlier_removing_min_nei: 3
+  TRIANGULATION:
+    # defect triangle
+    defect_triangulation_type: "3D" # 2D 3D
+    tri_angle_min: 10 # degree 3d 15 the larger the more strict
+    tri_angle_max: 150 # degree the less the more strict
+    # IQR method
+    is_IQR: true
+    tri_area_max_scale_factor: 2 # 2d 10 3d 20
+    tri_length_max_scale_factor: 2 # 2d 10 3d 20
+    # histogram & fall method
+    is_hist: false
+    is_hist_fall: false
+    tri_area_percentage: 0.9995 # hist 0.995 # hist fall: 0.9995
+    tri_length_percentage: 0.9995 # hist 0.995 # hist fall: 0.99995
+  CONFORMALMAPPING:
+    # corner selection rectangular weight
+    rectangular_corner_weight: 100
+    # rectangular conformal mapping
+    height_opt_iters: 24
+
+DEBUG:
+  results_dir: "/home/user/results"
+  data_set: "KITTI" # KITTI Newer_College
+  seq: "05" # 05 Newer_College_Short_01
+  is_save_middle_results: false
+  is_save_final_results: true # T_w_lidar poses
+  is_evaluate_time: false
+  MIDDLE_MAP:
+    is_save_middle_map: true
+    middle_map_highest_IoU_new_landmark_thres: 0.15
+  FINAL_MAP:
+    LOAD_MIDDLE_MAP:
+      is_load_aabb_map: true
+      is_load_middle_map: true
+    LOAD_FINAL_MAP:
+      is_load_final_map: false
+
+AABB:
+  skin_thickness: 0.0 # percentage of length
+  extra_skin_thickness: 0.1 # the lower more pricise data association 0.1 or 0.2
+  ground_fatten_scale: 5
+  touch_is_overlap: false
+
+SH_TABLE:
+  is_speed_up: true
+  max_SH_degree: 5
+  warping_SH_degree: 5 # used to smooth the reconstruction when using direct method
+  ground_SH_degree: 2
+  SH_scale: 0.8
+  azi_rso: 300
+  elev_rso: 300
+  init_SPH_pass: 1
+  inv_method: "normal"
+  bad_thres: 0.5
+  medium_thres: 0.2
+  update_sph_counter_thres: 20
+  update_sph_cpeff_queue_size: 2 # -1 means disable
+  sampling_factor: 1
+
+CURL_TRACKING:
+  frequency: 11
+  is_frame_to_frame: false
+  DATA_ASSOCIATION:
+    weight_of_IoU: 1 # (0~1) centroids distance's weight is 1-weight_of_IoU
+    largest_centroid_distance: 0.2 # for final score calculation
+    largest_tree_key_difference: -1 # don't use the map long ago; -1 means use the whole map. parameter "map_window_size" has the similar function
+    IQR_scale_factor: 0.5
+    is_select_the_best_pair_only: true
+    is_use_score_as_weight: true
+    max_seg_pairs: -1 # -1 means no restrictions 25
+    max_ground_pairs: -1 # -1 means no restrictions 10
+  NEW_LANDMARK_GENERATION:
+    minimum_points_to_add_new_patch: 50
+    highest_IoU_new_landmark_thres: 0.05
+    lowest_IoU_for_same_obj_different_patch: 0.8
+    lowest_landmark_centroids_distance: 0.5
+    landmark_queue_size: -1 # -1 means disable
+    max_new_added_landmarks_num: -1 # -1 means no restriction 35
+    IQR_max_distance_of_landmarks: -100 # -100 means no restriction. make sure that the new landmark is not too far from the lidar center
+  OPTIMIZATION:
+    is_two_step_opt: true # two step optimization means first optimize z, roll, pitch by using ground points, then optimize x, y, yaw by using segment points
+    min_num_ground_pairs: 5 # if ground pairs less than this number, two step optimization would be disable
+    min_num_seg_pairs: 10 # if segmentation pairs less than this number, two step optimization would be disable
+    # ceres settings
+    is_stop_after_cost_increased: false # now is not working any more
+    max_num_iterations: 100
+    update_state_every_iteration: false
+    is_robust_kernel: true
+    kernel_threshold: 0.01
+    max_valid_residual: 0.1
+    opt_num_threads: 3
+    ground_opt_step: 3
+  VISUALIZATION:
+    color_change_step: 0.33
+
+MAP_GENERATION:
+  MAP_PROPERTIES:
+    outlier_patch_IQR_thres: 4 #4*20 0 means don't remove any outlier patches
+  DIRECTORIES:
+    trajectory_dir: "/KITTI_trajectory_07" # relative to "DEBUG result_dir"
