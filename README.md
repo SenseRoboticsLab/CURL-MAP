@@ -5,7 +5,7 @@ We extend the continuous reconstruction and memory efficiency advantages of [CUR
 </p> 
 With the same CURL-MAP, can produce different resolutions of reconstruction.
 
-# Build and Run
+# Build and Run (Ubuntu System)
 ```
 git cloue https://github.com/SenseRoboticsLab/CURL-MAP.git
 cd CURL-MAP
