@@ -4,7 +4,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN dpkg-reconfigure locales
 
 ARG NUM_THREADS
-ARG GIT_TOKEN
 
 # switch gcc and g++ version
 RUN apt-get update && \
@@ -177,19 +176,11 @@ RUN cd Livox-SDK && \
 WORKDIR /home/user/catkin_ws/src
 # In Dockerfile
 
-RUN git clone https://$GIT_TOKEN:x-oauth-basic@github.com/SenseRoboticsLab/CURL_SLAM_ros.git
+RUN git clone https://github.com/SenseRoboticsLab/CURL-MAP.git
 RUN cd CURL_SLAM_ros && git checkout ICRA24
 
-# modify the path in the config file
-# RUN sed -i 's|"/home/zkc/Desktop/newer_college"|"/home/user/dataSets/CURL-MAP-Experiments/newer_college"|' ./CURL_SLAM_ros/config/config.yaml
-# RUN sed -i 's|"/media/zkc/Seagate Portable Drive5/DataSets/kitti/poses"|"/home/user/dataSets/kitti_velodyne_odom_dataset/poses"|' ./CURL_SLAM_ros/config/config.yaml
-# RUN sed -i 's|/home/zkc/Application|/home/user/Application|' ./CURL_SLAM_ros/CMakeLists.txt
-# RUN sed -i 's|ceres-solver-2.1.0/installation_release|ceres-solver/installation|' ./CURL_SLAM_ros/CMakeLists.txt
 
-# RUN git clone https://$GIT_TOKEN:x-oauth-basic@github.com/$GIT_USERNAME/TRAVEL.git
-
-
-RUN git clone https://$GIT_TOKEN:x-oauth-basic@github.com/SenseRoboticsLab/patchwork-plusplus-ros-modified.git
+RUN git clone https://github.com/SenseRoboticsLab/patchwork-plusplus-ros-modified.git
 RUN cd patchwork-plusplus-ros-modified && git checkout docker_version
 # RUN sed -i 's|/home/zkc/Application|/home/user/Application|' ./patchwork-plusplus-ros-modified/CMakeLists.txt
 
@@ -200,9 +191,7 @@ RUN echo "source /home/user/catkin_ws/devel/setup.bash" >> /home/user/.bashrc
 RUN echo "alias Open3D='/usr/local/bin/Open3D/Open3D'" >> /home/user/.bashrc
 
 RUN sudo chown -R user:user /home/user/catkin_ws
-# Disable rviz
-# WORKDIR /home/user/catkin_ws/src/TRAVEL/launch
-# RUN sed -i 's|<node name="rivz_mapping" pkg="rviz" type="rviz" args="-d $(find curl_slam)\/rviz\/rviz_mapping.rviz"\/>|<!--     <node name="rivz_mapping" pkg="rviz" type="rviz" args="-d $(find curl_slam)\/rviz\/rviz_mapping.rviz"\/> -->|' run_patchwork_kitti.launch
+
 
 RUN echo 'source /home/user/.bashrc' > /root/.bashrc
 
