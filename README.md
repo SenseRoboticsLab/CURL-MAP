@@ -122,3 +122,8 @@ CURL-MAP is able to achieve real-time performance on a CPU in the FAST mode.
 <p align="center">
 <img src="./images/time_evaluation-cropped_page-0001.jpg" alt="framework" width=80%/>
 </p> 
+
+# Acknowledgments
+The **conformal parameterisation** module in this project is a C++ reimplementation of the original MATLAB code from  
+[garyptchoi/rectangular-conformal-map](https://github.com/garyptchoi/rectangular-conformal-map),  
+which is licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
