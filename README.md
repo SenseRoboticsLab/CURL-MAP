@@ -91,7 +91,7 @@ roslaunch curl_slam curl_reconstruction.launch
 - [ ]  Add comments for parameters
 - [ ]  Clean the code
 
-# Results (Note: Large GIFs, Loading Time Required)
+# Results
 ### 1. Continuous Reconstruction
 <p align="center">
 <img src="images/1.gif" alt="continuous reconstruction" width=80%/>
