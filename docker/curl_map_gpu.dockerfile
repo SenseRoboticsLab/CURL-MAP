@@ -177,7 +177,7 @@ WORKDIR /home/user/catkin_ws/src
 # In Dockerfile
 
 RUN git clone https://github.com/SenseRoboticsLab/CURL-MAP.git
-RUN cd CURL-MAP && git checkout ICRA24
+RUN cd CURL-MAP
 
 
 RUN git clone https://github.com/SenseRoboticsLab/patchwork-plusplus-ros-modified.git
