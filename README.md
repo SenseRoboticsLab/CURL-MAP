@@ -24,7 +24,7 @@ cd CURL-MAP
 sudo docker build -f ./docker/curl_map_cpu.dockerfile --build-arg NUM_THREADS=12 -t curl_map:v0 .
 ```
 
-> With Nvidia GPU, can speed up rivz visualization
+> With Nvidia GPU, can speed up rivz visualization. ([NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) needs to be installed)
 
 ```
 sudo docker build -f ./docker/curl_map_gpu.dockerfile --build-arg NUM_THREADS=12 -t curl_map:v0 .
