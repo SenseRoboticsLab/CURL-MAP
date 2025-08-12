@@ -51,7 +51,7 @@ sudo docker run --name curl_map_container -it --privileged --gpus all -e="NVIDIA
 4. Create a new terminal inside the container
 
 ```
-docker exec -it curl_map_container /bin/bash
+sudo docker exec -it curl_map_container /bin/bash
 ```
 
 ## II. Run CURL-MAP (program depends on config.yaml)
