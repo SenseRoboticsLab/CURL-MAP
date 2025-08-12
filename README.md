@@ -90,13 +90,14 @@ rosbag play <your rosbag>
 roslaunch curl_slam curl_reconstruction.launch
 ```
 
-Click refresh button like the image shows
+Click refresh button shows in the image
 
 <p align="center">
 <img src="./images/rqt.png" alt="framework" width=50%/>
 </p>
 
 Then `w` and `degree` can be used to adjust density and detail of the reconstruction respectively.
+
 <p align="center">
 <img src="./images/rqt2.png" alt="framework" width=50%/>
 </p>
